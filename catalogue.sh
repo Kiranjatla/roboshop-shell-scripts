@@ -16,6 +16,7 @@ if [ $? -ne 0 ]; then
  user add roboshop &>>${LOG_FILE}
   statuscheck $?
 fi
+
 echo "Download catalogue application code"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
  statuscheck $?
