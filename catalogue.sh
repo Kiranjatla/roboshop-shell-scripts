@@ -8,7 +8,7 @@ LOG_FILE=/tmp/catalogue
  echo status=$?
 
  echo "Add Roboshop application user"
- useradd roboshop &>>${LOG_FILE}
+ user add roboshop &>>${LOG_FILE}
  echo status=$?
 
 echo "Download catalogue application code"
