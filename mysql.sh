@@ -1,17 +1,17 @@
 LOG_FILE=/tmp/mysql
 
  source common.sh
- echo"setting up  MySQL Repo file"
+ echo "setting up  MySQL Repo file"
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo &>>$LOG_FILE
 statuscheck $?
-echo"Disable MY SQL Default Module to enable 5.7  MY SQL"
+echo "Disable MY SQL Default Module to enable 5.7  MY SQL"
 dnf module disable mysql -y &>>$LOG_FILE
 statuscheck $?
 
- echo"Install MY SQL"
+ echo "Install MY SQL"
  yum install mysql-community-server -y &>>$LOG_FILE
  statuscheck $?
- echo"Start My SQL Service"
+ echo "Start My SQL Service"
  systemctl enable mysqld &>>$LOG_FILE
  systemctl start mysqld &>>$LOG_FILE
  statuscheck $?
