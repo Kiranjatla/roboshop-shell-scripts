@@ -1,18 +1,6 @@
 LOG_FILE=/tmp/mongodb
 
-ID=$(id -u)
-if [ ID -ne 0 ] ; then
-echo you should run this script ass root or with sudo privilages.
-exit 1
-fi
-statuscheck(){
-   if [ $1 -eq 0 ] ; then
-       echo -e status = "\e[32mSuccess\e[0m"
-     else
-       echo -e status = "\e[31mFailure\e[0m"
-       exit 1
-      fi
-}
+source common.sh
 
 echo "Setting Mongodb Repos File"
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$LOG_FILE
@@ -37,7 +25,7 @@ echo "Downloading Mongodb Schema"
 
   cd /tmp
   echo "Extracting Schema files"
-  unzip mongodb.zip &>>$LOG_FILE
+  unzip -o mongodb.zip &>>$LOG_FILE
   statuscheck $?
   cd mongodb-main
 
