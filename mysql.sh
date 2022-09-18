@@ -15,8 +15,11 @@ statuscheck $?
  systemctl enable mysqld &>>$LOG_FILE
  systemctl start mysqld &>>$LOG_FILE
  statuscheck $?
-# grep temp /var/log/mysqld.log
-# mysql_secure_installation
+
+ DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+ echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD ('${ROBOSHOP_MYSQL_PASSWORD}'); FLUSH PRIVILAGES;" >/tmp/root-pass.sql
+
+ mysql_secure_installation
 # mysql -uroot -pRoboShop@1
 # > uninstall plugin validate_password;
 # curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
