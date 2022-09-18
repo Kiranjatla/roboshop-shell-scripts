@@ -16,9 +16,10 @@ statuscheck $?
  systemctl start mysqld &>>$LOG_FILE
  statuscheck $?
 
- DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+ DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
- echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD ('mypass'); FLUSH PRIVILAGES;" >/tmp/root-pass.sql
+ echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');
+ FLUSH PRIVILEGES;" >/tmp/root-pass.sql
 
 #echo "Change the default root password"
 #mysql -uroot -p "${DEFAULT_PASSWORD}" </tmp/root-pass.sql &>>$LOG_FILE
