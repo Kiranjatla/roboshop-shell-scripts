@@ -19,7 +19,7 @@ fi
    fi
 
 id roboshop &>>${LOG_FILE}
-if [ $? -ne 0]; then
+if [ $? -ne 0 ]; then
  echo "Add Roboshop application user"
  user add roboshop &>>${LOG_FILE}
  if [ $? -eq 0 ] ; then
@@ -40,7 +40,7 @@ if [ $? -eq 0 ] ; then
  cd /home/roboshop
 
  echo "Clean old catlaogue app content"
-  rm -rf catalogue &>>$LOG_FILES
+  rm -rf catalogue &>>${LOG_FILE}
   if [ $? -eq 0 ] ; then
        echo status = success
      else
