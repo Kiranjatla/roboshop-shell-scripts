@@ -1,17 +1,5 @@
 LOG_FILE=/tmp/catalogue
-ID=$(id -u)
-if [ ID -ne 0 ] ; then
-echo you should run this script ass root or with sudo privilages.
-exit 1
-fi
-statuscheck(){
-   if [ $1 -eq 0 ] ; then
-       echo -e status = "\e[32mSuccess\e[0m"
-     else
-       echo -e status = "\e[31mSuccess\e[0m"
-       exit 1
-      fi
-}
+Source common.sh
 
  echo "Setup Nodejs repos"
  curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
@@ -30,6 +18,7 @@ fi
 echo "Download catalogue application code"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>${LOG_FILE}
  statuscheck $?
+
  cd /home/roboshop
 
  echo "Clean old catlaogue app content"
