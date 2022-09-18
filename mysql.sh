@@ -18,7 +18,7 @@ statuscheck $?
 
  DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD ('${ROBOSHOP_MYSQL_PASSWORD}'); FLUSH PRIVILAGES;" >/tmp/root-pass.sql
-echo"Change the default root password"
+echo "Change the default root password"
 mysql -uroot -p "${DEFAULT_PASSWORD}" </tmp/root-pass.sql &>>$LOG_FILE
 statuscheck $?
 
