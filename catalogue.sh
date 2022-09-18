@@ -9,7 +9,7 @@ LOG_FILE=/tmp/catalogue
     echo status = success
   else
     echo status = failure
-    exit
+    exit 1
    fi
 
  echo "Add Roboshop application user"
@@ -18,7 +18,7 @@ LOG_FILE=/tmp/catalogue
      echo status = success
    else
      echo status = failure
-     exit
+     exit 1
     fi
 
 echo "Download catalogue application code"
@@ -27,7 +27,7 @@ if [ $? -eq 0 ] ; then
     echo status = success
   else
     echo status = failure
-    exit
+    exit 1
    fi
  cd /home/roboshop
 
@@ -37,7 +37,7 @@ if [ $? -eq 0 ] ; then
      echo status = success
    else
      echo status = failure
-     exit
+     exit 1
     fi
 
  mv catalogue-main catalogue
@@ -49,7 +49,7 @@ if [ $? -eq 0 ] ; then
      echo status = success
    else
      echo status = failure
-     exit
+     exit 1
     fi
 
 echo "Setup Catalogue service"
@@ -58,7 +58,7 @@ if [ $? -eq 0 ] ; then
     echo status = success
   else
     echo status = failure
-    exit
+    exit 1
    fi
  systemctl daemon-reload &>>${LOG_FILE}
  systemctl enable catalogue &>>${LOG_FILE}
@@ -69,5 +69,5 @@ if [ $? -eq 0 ] ; then
     echo status = success
   else
     echo status = failure
-    exit
+    exit 1
    fi
