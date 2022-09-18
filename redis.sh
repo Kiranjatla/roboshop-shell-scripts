@@ -15,7 +15,7 @@ LOG_FILE=/tmp/catalogue
  statuscheck $?
 
  echo "Update Redis Listen Address 127.0.0.1 to 0.0.0.0"
- sed -i -e 's/127.0.0.1/0.0.0.0' /etc/redis.conf /etc/redis/redis.conf &>>$LOG_FILE
+ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf &>>$LOG_FILE
  statuscheck $?
 
  systemctl enable redis &>>$LOG_FILE
