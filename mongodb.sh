@@ -29,7 +29,7 @@ echo "Downloading Mongodb Schema"
   statuscheck $?
   cd mongodb-main
 
-  echo"Load Catalogue service schema"
+  echo "Load Catalogue service schema"
   mongo < catalogue.js &>>$LOG_FILE
   statuscheck $?
 
