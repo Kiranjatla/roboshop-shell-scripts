@@ -16,14 +16,14 @@ statuscheck $?
  systemctl start mysqld &>>$LOG_FILE
  statuscheck $?
 
- DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+ DEFAULT_PASSWORD=$(sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
- echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
- FLUSH PRIVILEGES;" >/tmp/root-pass.sql
+ echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');
+ FLUSH PRIVILEGES;" >/tmp/root-pass-sql
 
- echo "Change the default root password"
- mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.sql &>>$LOG_FILE
- statuscheck $?
+ #echo "Change the default root password"
+ #mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.sql &>>$LOG_FILE
+ #statuscheck $?
 
  #mysql_secure_installation
 # mysql -uroot -pRoboShop@1
