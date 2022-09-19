@@ -22,7 +22,7 @@ statuscheck $?
  FLUSH PRIVILEGES;" >/tmp/root-pass-sql
 
  echo "Change the default root password"
- mysql -uroot -p"${DEFAULT_PASSWORD}"  </tmp/root-pass.sql &>>$LOG_FILE
+ mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}"  </tmp/root-pass.sql &>>$LOG_FILE
  statuscheck $?
 
 
