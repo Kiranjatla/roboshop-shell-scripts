@@ -20,10 +20,12 @@ statuscheck $?
 
  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
  FLUSH PRIVILEGES;" >/tmp/root-pass-sql
-
+ echo "Show databases;" |mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG_FILE
+ if [ $? -ne 0 ]; then
  echo "Change the default root password"
  mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}" </tmp/root-pass.sql &>>$LOG_FILE
  statuscheck $?
+ fi
 
  #mysql_secure_installation
 # mysql -uroot -pRoboShop@1
