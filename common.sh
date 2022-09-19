@@ -52,7 +52,6 @@ SYSTEMD_SETUP(){
        systemctl start ${COMPONENT} &>>${LOG_FILE}
        statuscheck $?
        }
-}
 NODEJS(){
   echo "Setup Nodejs repos"
     curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
@@ -69,8 +68,8 @@ NODEJS(){
       statuscheck $?
 
       SYSTEMD_SETUP
-
-     JAVA(){
+}
+     JAVA() {
        echo "Install maven"
        yum install maven -y &>>${LOG_FILE}
        statuscheck $?
@@ -83,5 +82,4 @@ NODEJS(){
         statuscheck $?
 
         SYSTEMD_SETUP
-
-     }
+}
