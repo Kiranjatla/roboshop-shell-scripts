@@ -20,6 +20,7 @@ statuscheck $?
 
  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
  FLUSH PRIVILEGES;" >/tmp/root-pass-sql
+
  echo "Show databases;" |mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG_FILE
  if [ $? -ne 0 ]; then
  echo "Change the default root password"
@@ -27,8 +28,12 @@ statuscheck $?
  statuscheck $?
  fi
 
- #mysql_secure_installation
-# mysql -uroot -pRoboShop@1
+echo 'show plugins'|mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} | grep validate_password &>>$LOG_FILE
+if [ $? -ne 0 ]; then
+  echo "Uninstall password validation plugin"
+  echo "Uninstall plugin validate_password;" | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>LOG_FILE
+  statuscheck $?
+
 # > uninstall plugin validate_password;
 # curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
 # cd /tmp
