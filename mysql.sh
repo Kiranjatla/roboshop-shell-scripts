@@ -16,32 +16,30 @@ statuscheck $?
  systemctl start mysqld &>>$LOG_FILE
  statuscheck $?
 
- DEFAULT_PASSWORD=$( sudo grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
+ DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
- echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
+ echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');
  FLUSH PRIVILEGES;" >/tmp/root-pass-sql
 
- echo "Show databases;" |mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG_FILE
- if [ $? -ne 0 ]; then
- echo "Change the default root password"
- mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}"  </tmp/root-pass.sql &>>$LOG_FILE
- statuscheck $?
- fi
+ #echo "Change the default root password"
+ #mysql -uroot -p"${DEFAULT_PASSWORD}"  </tmp/root-pass.sql &>>$LOG_FILE
+ #statuscheck $?
 
-echo 'show plugins'|mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | grep validate_password &>>$LOG_FILE
-if [ $? -eq 0 ]; then
-  echo "Uninstall password validation plugin"
-  echo "Uninstall plugin validate_password;" | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>LOG_FILE
-  statuscheck $?
 
- echo "Download Schema "
- curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>LOG_FILE
- statuscheck $?
- echo "Extract schema"
- cd /tmp
- unzip -o mysql.zip
- statuscheck $?
- echo "Load Schema"
- cd mysql-main
- mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>LOG_FILE
- statuscheck $?
+#echo 'show plugins'|mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | grep validate_password &>>$LOG_FILE
+#if [ $? -eq 0 ]; then
+ # echo "Uninstall password validation plugin"
+  #echo "Uninstall plugin validate_password;" | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>LOG_FILE
+  #statuscheck $?
+
+ #echo "Download Schema "
+ #curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>LOG_FILE
+ #statuscheck $?
+ #echo "Extract schema"
+ #cd /tmp
+ #unzip -o mysql.zip
+ #statuscheck $?
+ #echo "Load Schema"
+ #cd mysql-main
+ #mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>LOG_FILE
+ #statuscheck $?
