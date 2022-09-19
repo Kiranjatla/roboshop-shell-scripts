@@ -70,14 +70,14 @@ NODEJS(){
       SYSTEMD_SETUP
 }
      JAVA() {
-       echo "Install maven"
+       echo "Install maven" &>>${LOG_FILE}
        yum install maven -y &>>${LOG_FILE}
        statuscheck $?
 
         APP_PREREQ
 
        echo "Download Dependencies And Make Package"
-        mvn clean package
+        mvn clean package &>>${LOG_FILE}
         mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar &>>${LOG_FILE}
         statuscheck $?
 
