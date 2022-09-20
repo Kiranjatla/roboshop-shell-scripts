@@ -21,10 +21,12 @@ statuscheck $?
  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
  FLUSH PRIVILEGES;" >/tmp/root-pass.sql
 
- echo "Change the default root password"
- mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}"  </tmp/root-pass.sql &>>$LOG_FILE
- statuscheck $?
-
+ echo "show databases;" |mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG_FILE
+ if [ $? -ne 0 ]; then
+   echo "Change the default root password"
+   mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}"  </tmp/root-pass.sql &>>$LOG_FILE
+   statuscheck $?
+fi
 
 #echo 'show plugins'|mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | grep validate_password &>>$LOG_FILE
 #if [ $? -eq 0 ]; then
