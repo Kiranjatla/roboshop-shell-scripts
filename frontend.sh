@@ -31,7 +31,5 @@ statuscheck $?
  echo Starting Nginx Service
  systemctl enable nginx &>>$LOG_FILE
  statuscheck $?
- systemctl start nginx &>>$LOG_FILE
- statuscheck $?
  systemctl restart nginx &>>$LOG_FILE
  statuscheck $?
