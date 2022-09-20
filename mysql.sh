@@ -38,11 +38,11 @@ echo 'show plugins'|mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | grep
  curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>LOG_FILE
  statuscheck $?
  echo "Extract schema"
- cd /tmp
- unzip -o mysql.zip
+ cd /tmp &>>LOG_FILE
+ unzip -o mysql.zip &>>LOG_FILE
  statuscheck $?
  echo "Load Schema"
- cd mysql-main
+ cd mysql-main &>>LOG_FILE
  mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>LOG_FILE
  statuscheck $?
  fi
