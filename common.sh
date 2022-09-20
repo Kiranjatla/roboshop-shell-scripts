@@ -83,7 +83,7 @@ NODEJS(){
 
         SYSTEMD_SETUP
 }
-PYTHON(){
+ PYTHON() {
   echo "Install Python 3"
   yum install python36 gcc python3-devel -y &>>${LOG_FILE}
   statuscheck $?
@@ -93,7 +93,7 @@ PYTHON(){
   cd /home/roboshop/${COMPONENT} &>>${LOG_FILE}
 
   echo "Install Python Dependencies"
- pip3 install -r requirements.txt &>>${LOG_FILE}
- statuscheck $?
+  pip3 install -r requirements.txt &>>${LOG_FILE}
+  statuscheck $?
 
 }
