@@ -99,10 +99,11 @@ NODEJS() {
 
   APP_UID=$(id -u roboshop)
   APP_GID=$(id -g roboshop)
+
   echo "Update Payment Configuration Files"
-  sed -i -e 's/uid/ c uid = ${APP_UID}' -e 's/gid/ c gid = ${APP_GID}' /home/roboshop/${COMPONENT}/${COMPONENT}.ini &>>${LOG_FILE}
+  sed -i -e "/uid/ c uid = ${APP_UID}" -e "/gid/ c gid = ${APP_GID}" /home/roboshop/${COMPONENT}/${COMPONENT}.ini &>>${LOG_FILE}
   statuscheck $?
-  echo"Update "
+
 
 
 }
