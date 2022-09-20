@@ -90,7 +90,8 @@ PYTHON(){
 
   APP_PREREQ
 
-  cd /home/roboshop/payment &>>${LOG_FILE}
+  cd /home/roboshop/${COMPONENT} &>>${LOG_FILE}
+
   echo "Install Python Dependencies"
  pip3 install -r requirements.txt &>>${LOG_FILE}
  statuscheck $?
