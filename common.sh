@@ -4,7 +4,7 @@ if [ $ID -ne 0 ] ; then
 echo you should run this script as root or with sudo privilages.
 exit 1
 fi
- statuscheck(){
+ statuscheck() {
    if [ $1 -eq 0 ] ; then
        echo -e status = "\e[32mSuccess\e[0m"
      else
@@ -12,11 +12,11 @@ fi
        exit 1
       fi
 }
-APP_PREREQ(){
+APP_PREREQ() {
       id roboshop &>>${LOG_FILE}
        if [ $? -ne 0 ]; then
         echo "Add Roboshop application user"
-        user add roboshop &>>${LOG_FILE}
+        useradd roboshop &>>${LOG_FILE}
          statuscheck $?
        fi
 
@@ -37,7 +37,7 @@ APP_PREREQ(){
         mv ${COMPONENT}-main ${COMPONENT}
         cd /home/roboshop/${COMPONENT}
 }
-SYSTEMD_SETUP(){
+SYSTEMD_SETUP() {
   echo "Update SystemD service file"
       sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodg.roboshop.internal/' -e 's/CARTENDPOINT/cart.roboshop.internal/' -e 's/DBHOST/mysql.roboshop.internal/' /home/roboshop/${COMPONENT}/systemd.service
       statuscheck $?
@@ -52,7 +52,7 @@ SYSTEMD_SETUP(){
        systemctl start ${COMPONENT} &>>${LOG_FILE}
        statuscheck $?
        }
-NODEJS(){
+NODEJS() {
   echo "Setup Nodejs repos"
     curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
     statuscheck $?
