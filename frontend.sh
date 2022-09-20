@@ -20,6 +20,13 @@
 
  mv frontend-main/static/* . &>>$LOG_FILE
  mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
+ statuscheck $?
+
+echo "Update Roboshop Config files"
+sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' -e '/user/ s/localhost/user.roboshop.internal/' -e '/cart/ s/localhost/cart.roboshop.internal/' -e '/payment/ s/localhost/payment.roboshop.internal/' -e '/shipping/ s/localhost/shipping.roboshop.internal/' /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
+statuscheck $?
+
+
 
  echo Starting Nginx Service
  systemctl enable nginx &>>$LOG_FILE
