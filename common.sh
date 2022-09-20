@@ -1,6 +1,6 @@
 
 ID=$(id -u)
-if [ ID -ne 0 ] ; then
+if [ $ID -ne 0 ] ; then
 echo you should run this script as root or with sudo privilages.
 exit 1
 fi
