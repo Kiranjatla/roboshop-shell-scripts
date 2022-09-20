@@ -83,3 +83,16 @@ NODEJS(){
 
         SYSTEMD_SETUP
 }
+PYTHON(){
+  echo "Install Python 3"
+  yum install python36 gcc python3-devel -y &>>${LOG_FILE}
+  statuscheck $?
+
+  APP_PREREQ
+
+  cd /home/roboshop/payment &>>${LOG_FILE}
+  echo "Install Python Dependencies"
+ pip3 install -r requirements.txt &>>${LOG_FILE}
+ statuscheck $?
+
+}
