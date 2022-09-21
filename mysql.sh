@@ -16,6 +16,7 @@ statuscheck $?
  echo "Install MY SQL"
  yum install mysql-community-server -y &>>$LOG_FILE
  statuscheck $?
+
  echo "Start My SQL Service"
  systemctl enable mysqld &>>$LOG_FILE
  systemctl start mysqld &>>$LOG_FILE
@@ -38,7 +39,7 @@ echo 'show plugins'| mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | gre
   echo "Uninstall password validation plugin"
   echo "Uninstall plugin validate_password;" | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>LOG_FILE
   statuscheck $?
-
+fi
  echo "Download Schema "
  curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>LOG_FILE
  statuscheck $?
@@ -52,4 +53,3 @@ echo 'show plugins'| mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | gre
  cd mysql-main &>>LOG_FILE
  mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>LOG_FILE
  statuscheck $?
- fi
