@@ -24,18 +24,15 @@ APP_PREREQ() {
        curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG_FILE}
         statuscheck $?
 
-        cd /home/roboshop
-
         echo "Clean old ${COMPONENT} app content"
-         rm -rf ${COMPONENT} &>>${LOG_FILE}
+         cd /home/roboshop && rm -rf ${COMPONENT} &>>${LOG_FILE}
           statuscheck $?
 
         echo "Extracting ${COMPONENT} application code"
         unzip /tmp/${COMPONENT}.zip &>>${LOG_FILE}
          statuscheck $?
 
-        mv ${COMPONENT}-main ${COMPONENT}
-        cd /home/roboshop/${COMPONENT}
+        mv ${COMPONENT}-main ${COMPONENT} && cd /home/roboshop/${COMPONENT}
 }
 SYSTEMD_SETUP() {
   echo "Update SystemD service file"
