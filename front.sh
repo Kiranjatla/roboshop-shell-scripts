@@ -1,9 +1,10 @@
  echo Installing Nginx software
  yum install nginx -y &>>$/tmp/frontend
- statuscheck $?
+
 
  echo Downloading Nginx Web Content
  curl -s -L -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>$/tmp/frontend
+
  cd /usr/share/nginx/html
 
  echo Removing Old Web Content
