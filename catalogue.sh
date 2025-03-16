@@ -3,7 +3,7 @@ echo "setup nodejs repos"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>LOG_FILE
 echo status = $?
 
-echo"Install nodejs"
+echo "Install nodejs"
 yum install nodejs -y  &>>LOG_FILE
 echo status = $?
 
