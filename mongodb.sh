@@ -19,22 +19,22 @@
  systemctl restart mongod
  echo status = $?
 
- echo"Downloading Mongodb Schema"
+ echo "Downloading Mongodb Schema"
  curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG_FILE
  echo status = $?
 
  cd /tmp
- echo"extract Mongodb schema files"
+ echo "extract Mongodb schema files"
  unzip mongodb.zip &>>$LOG_FILE
  echo status = $?
 
  cd mongodb-main
 
- echo"extract Catalogue service schema files"
+ echo "extract Catalogue service schema files"
  mongo < catalogue.js
  echo status = $?
 
- echo"extract users service schema files"
+ echo "extract users service schema files"
  mongo < users.js
  echo status = $?
 
