@@ -5,6 +5,7 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
 
 echo "Install nodejs"
@@ -13,6 +14,7 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
 
 echo "Adding Roboshop application User"
@@ -21,6 +23,7 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
 
 echo "Download catalogue application code"
@@ -29,6 +32,7 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
 
 cd /home/roboshop
@@ -39,6 +43,7 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
 
 mv catalogue-main catalogue
@@ -50,6 +55,7 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
 
 echo "Setup Catalogue Service"
@@ -58,6 +64,7 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
 
 systemctl daemon-reload &>>LOG_FILE
@@ -69,4 +76,5 @@ if [ $? -eq 0 ]; then
   echo status = success
   else
   echo status - failure
+  exit
   fi
