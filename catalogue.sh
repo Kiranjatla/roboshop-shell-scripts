@@ -9,7 +9,7 @@ if [ $? -eq 0 ]; then
   fi
 
 echo "Install nodejs"
-yum install nodejs -y  &>>LOG_FILE
+ yum install nodejs -y &>>LOG_FILE
 if [ $? -eq 0 ]; then
   echo status = success
   else
