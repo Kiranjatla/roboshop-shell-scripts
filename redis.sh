@@ -11,7 +11,7 @@ dnf install remi-release-8.9.rpm -y &>>$LOG_FILE
 StatusCheck $?
 
 echo "Start redis"
-sudo syestemctl start redis &>>$LOG_FILE
+systemctl start redis &>>$LOG_FILE
 StatusCheck $?
 
 echo "Update Redis Listen address from 127.0.0.1 to 0.0.0.0"
