@@ -15,10 +15,10 @@
 
  echo "Start mysql service"
  systemctl enable mysqld &>>${LOG_FILE}
- systemctl start mysqld &>>${LOG_FILE}
+ systemctl restart mysqld &>>${LOG_FILE}
  StatusCheck $?
 
- DEFAULT_PASSWORD=$(sudo grep 'A temp' /var/log/mysqld.log | awk '{print $11}')
+ DEFAULT_PASSWORD=$(grep 'A temp' /var/log/mysqld.log | awk '{print $NF}')
 
  echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${ROBOSHOP_MYSQL_PASSWORD}');
  FLUSH PRIVILEGES;" >/tmp/root-pass.sql
