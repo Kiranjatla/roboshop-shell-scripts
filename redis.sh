@@ -3,7 +3,7 @@ LOG_FILE=/tmp/redis
 source common.sh
 
 echo "Setup YUM Repos for Redis"
-wget http://rpms.remirepo.net/enterprise/remi-release-8.9.rpm -y &>>$LOG_FILE
+sudo wget http://rpms.remirepo.net/enterprise/remi-release-8.9.rpm -y &>>$LOG_FILE
 StatusCheck $?
 
 echo "Enabling Redis YUM Modules"
