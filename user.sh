@@ -1,4 +1,4 @@
-LOG_FILE=/tmp/redis
+LOG_FILE=/tmp/user
 
 source common.sh
 COMPONENT=user
