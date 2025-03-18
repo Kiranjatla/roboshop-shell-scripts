@@ -10,7 +10,7 @@
  StatusCheck $?
 
  echo "update MongoDB Listen Ip Address"
- sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$LOG_FILE
  StatusCheck $?
 
  echo "Enabled mongodb server"
@@ -18,7 +18,7 @@
  StatusCheck $?
 
  echo "restarted mongodb server"
- systemctl restart mongod
+ systemctl restart mongod &>>$LOG_FILE
  StatusCheck $?
 
  echo "Downloading Mongodb Schema"
@@ -33,10 +33,10 @@
  cd mongodb-main
 
  echo "extract Catalogue service schema files"
- mongo < catalogue.js
+ mongo < catalogue.js &>>$LOG_FILE
  StatusCheck $?
 
  echo "extract users service schema files"
- mongo < users.js
+ mongo < users.js &>>$LOG_FILE
  StatusCheck $?
 
