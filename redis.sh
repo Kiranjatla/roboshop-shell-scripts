@@ -10,8 +10,8 @@ echo "Enabling Redis YUM Modules"
 dnf install remi-release-8.9.rpm -y &>>$LOG_FILE
 StatusCheck $?
 
-echo "Install Redis"
-yum install redis -y &>>$LOG_FILE
+echo "Start redis"
+susyemctl start redis &>>$LOG_FILE
 StatusCheck $?
 
 echo "Update Redis Listen address from 127.0.0.1 to 0.0.0.0"
