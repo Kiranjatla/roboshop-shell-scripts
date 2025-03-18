@@ -4,8 +4,8 @@ source common.sh
 
 echo "Setup YUM Repos for Redis"
 # THis remi repos is not working any more, So ignroe this step and move to next step directly. Run the commands from next step.
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>$LOG_FILE
-StatusCheck $?
+#dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>$LOG_FILE
+#StatusCheck $?
 
 echo "disabling Redis YUM Modules"
 dnf module disable redis -y &>>$LOG_FILE
