@@ -11,17 +11,17 @@ echo "disabling Redis YUM Modules"
 dnf module disable redis -y &>>$LOG_FILE
 StatusCheck $?
 
-echo "install redis"
-dnf install redis -y  &>>$LOG_FILE
-StatusCheck $?
-
 echo "enable Redis module"
 dnf module enable redis:6 -y &>>$LOG_FILE
 StatusCheck $?
 
+echo "install redis"
+dnf install redis -y  &>>$LOG_FILE
+StatusCheck $?
+
 
 echo "Update Redis Listen address from 127.0.0.1 to 0.0.0.0"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf /etc/redis/redis.conf
 StatusCheck $?
 
 echo "enable redis"
