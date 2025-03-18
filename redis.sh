@@ -10,6 +10,10 @@ echo "Enabling Redis YUM Modules"
 dnf install remi-release-8.9.rpm -y &>>$LOG_FILE
 StatusCheck $?
 
+echo "Install Redis"
+yum install redis -y &>>$LOG_FILE
+StatusCheck $?
+
 echo "Start redis"
 systemctl start redis &>>$LOG_FILE
 StatusCheck $?
