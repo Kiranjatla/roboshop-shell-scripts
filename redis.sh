@@ -3,19 +3,15 @@ LOG_FILE=/tmp/redis
 source common.sh
 
 echo "Setup YUM Repos for Redis"
-wget http://rpms.remirepo.net/enterprise/remi-release-8.9.rpm &>>$LOG_FILE
+dnf install https://rpms.remirepo.net/enterprise/remi-release-8.9.rpm -y &>>$LOG_FILE
 StatusCheck $?
 
 echo "Enabling Redis YUM Modules"
-dnf install remi-release-8.9.rpm -y &>>$LOG_FILE
+dnf module enable redis:remi-6.2 -y &>>$LOG_FILE
 StatusCheck $?
 
 echo "Install Redis"
 yum install redis -y &>>$LOG_FILE
-StatusCheck $?
-
-echo "Start redis"
-systemctl start redis &>>$LOG_FILE
 StatusCheck $?
 
 echo "Update Redis Listen address from 127.0.0.1 to 0.0.0.0"
