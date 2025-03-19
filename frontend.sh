@@ -24,6 +24,11 @@
  mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
  StatusCheck $?
 
+ echo "Update RoboShop Config File"
+ for component in catalogue user cart payment shipping ; do
+   sed -i -e "/$component/ s/localhost/${component}.roboshop.internal/" /etc/nginx/default.d/roboshop.conf &>>$LOG_FILE
+ done
+
  echo Starting Nginx Service
  systemctl enable nginx &>>$LOG_FILE
  systemctl restart nginx &>>$LOG_FILE
