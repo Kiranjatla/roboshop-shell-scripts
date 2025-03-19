@@ -30,8 +30,14 @@
    StatusCheck $?
  fi
 
+echo 'show plugins'| mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} 2>/dev/null | grep validate_password &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+  echo "Uninstall Password Validation Plugin"
+  echo "uninstall plugin validate_password;" | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG_FILE
+  StatusCheck $?
+fi
 
- #mysql -uroot -pRoboShop@1
+
 #> uninstall plugin validate_password;
  #curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
  #cd /tmp
