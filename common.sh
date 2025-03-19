@@ -90,7 +90,7 @@ JAVA(){
 
 PYTHON()
 {
-  echp" install python"
+  echo " install python"
   yum install python36 gcc python3-devel -y &>>${LOG_FILE}
   StatusCheck $?
 
