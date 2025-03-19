@@ -1,3 +1,6 @@
+ ##in this script it will ask envirnoment varibale is needed then enter below password in command line while executing the script
+ ##export ROBOSHOP_MYSQL_PASSWORD=RoboShop@1
+
  LOG_FILE=/tmp/mysql
  source common.sh
 
