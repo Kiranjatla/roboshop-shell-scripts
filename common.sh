@@ -87,3 +87,19 @@ JAVA(){
       SYSTEMD_SETUP
 
 }
+
+PYTHON()
+{
+  echp" install python"
+  yum install python36 gcc python3-devel -y &>>${LOG_FILE}
+  StatusCheck $?
+
+  APP_PREREQ
+
+cd /home/roboshop/${COMPONENT}
+
+echo "install python dependencies for app"
+pip3 install -r requirements.txt &>>${LOG_FILE}
+StatusCheck $?
+
+}
