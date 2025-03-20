@@ -19,7 +19,7 @@ echo "install redis"
 dnf install redis -y  &>>$LOG_FILE
 StatusCheck $?
 
-echo "Update Redis Listen address from 127.0.0.1 to 0.0.0.0"
+echo "Updated Redis Listen address from 127.0.0.1 to 0.0.0.0"
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf
 StatusCheck $?
 
