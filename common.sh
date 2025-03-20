@@ -72,20 +72,19 @@ NODEJS(){
 
 }
 
-JAVA(){
-
+JAVA() {
   echo "Install Maven"
-    yum install maven -y  &>>${LOG_FILE}
-    StatusCheck $?
+  yum install maven -y  &>>${LOG_FILE}
+  StatusCheck $?
 
-    APP_PREREQ
-    echo "Download Dependencies & Make Package"
-      mvn clean package &>>${LOG_FILE}
-      mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar   &>>${LOG_FILE}
-      StatusCheck $?
+  APP_PREREQ
 
-      SYSTEMD_SETUP
+  echo "Download Dependencies & Make Package"
+  mvn clean package &>>${LOG_FILE}
+  mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar   &>>${LOG_FILE}
+  StatusCheck $?
 
+  SYSTEMD_SETUP
 }
 
 PYTHON()
