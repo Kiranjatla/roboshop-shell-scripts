@@ -32,11 +32,8 @@
 
  cd mongodb-main
 
- echo "extract Catalogue service schema files"
- mongo < catalogue.js &>>$LOG_FILE
- StatusCheck $?
-
- echo "extract users service schema files"
- mongo < users.js &>>$LOG_FILE
- StatusCheck $?
+ echo "Load Schema"
+ for schema in catalogue.js users.js ; do
+   mongo < ${schema} &>>$LOG_FILE
+ done
 
