@@ -14,7 +14,7 @@ echo "Install Yum Repositories for RabbitMQ"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>$LOG_FILE
 StatusCheck $?
 
-echo "Install Erland "
+echo "Install RabbitMQ "
 yum install rabbitmq-server -y &>>$LOG_FILE
 StatusCheck $?
 
